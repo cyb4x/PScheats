@@ -4,7 +4,7 @@ PScheats is a collection of PowerShell scripts designed to automate tasks during
 
 ## Scripts
 
-###> T1136.ps1 - Create User and Add to Local Groups
+### > T1136.ps1 - Create User and Add to Local Groups
 
   This script creates a new user account on a machine and adds it to specified local groups. It also checks if the user can be added to the "Domain Admins" group. Additionally, the         script enables Remote Desktop and ensures the firewall rule for Remote Desktop is activated.
   
@@ -18,10 +18,10 @@ PScheats is a collection of PowerShell scripts designed to automate tasks during
   
   To run the script, use the following syntax:
   ```powershell
-  .\T1136.ps1 -username "newuser" -password "YourPasswordHere"
+  .\T1136.ps1 -username "newuser"
   ```
   
-  OR
+  *OR Specify password*
   
   ```powershell
   .\T1136.ps1 -username "newuser" -password "YourPasswordHere"
