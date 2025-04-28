@@ -32,3 +32,4 @@ The `CreateUser.ps1` script allows you to automate the creation of a user on a W
 ```powershell
 .\CreateUser.ps1 -d testuser 
 ```
+![](1.png)
