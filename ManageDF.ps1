@@ -69,6 +69,31 @@ function Check-Status {
     Write-Host "Public Firewall Enabled:       $publicFW"
 }
 
+# Function to monitor Defender and Firewall status continuously
+function Monitor-DefenderAndFirewall {
+    Write-Host "[*] Monitoring Defender and Firewall status..." -ForegroundColor Yellow
+    while ($true) {
+        # Get current statuses
+        $realtime = (Get-MpPreference).DisableRealtimeMonitoring
+        $domainFW = (Get-NetFirewallProfile -Profile Domain).Enabled
+        $privateFW = (Get-NetFirewallProfile -Profile Private).Enabled
+        $publicFW = (Get-NetFirewallProfile -Profile Public).Enabled
+
+        # Check and disable Defender and Firewall if enabled
+        if ($realtime -eq $false) {
+            Write-Host "[*] Defender Real-time Protection is enabled. Disabling..." -ForegroundColor Red
+            Disable-DefenderAndFirewall
+        }
+
+        if ($domainFW -eq $true -or $privateFW -eq $true -or $publicFW -eq $true) {
+            Write-Host "[*] Firewall is enabled. Disabling..." -ForegroundColor Red
+            Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled False
+        }
+
+        Start-Sleep -Seconds 10  # Check every 10 seconds
+    }
+}
+
 # Normalize the action input
 $ActionNormalized = $Action.ToLower().Replace("-", "").Replace("--", "")
 
@@ -79,7 +104,8 @@ switch ($ActionNormalized) {
     "d"      { Disable-DefenderAndFirewall }
     "status" { Check-Status }
     "s"      { Check-Status }
+    "monitor" { Monitor-DefenderAndFirewall }
     default {
-        Write-Host "[!] Invalid action. Use Enable, Disable, Status, or -e, -d, -s, --enable, --disable, --status" -ForegroundColor Red
+        Write-Host "[!] Invalid action. Use Enable, Disable, Status, Monitor, or -e, -d, -s, --enable, --disable, --status, --monitor" -ForegroundColor Red
     }
 }
