@@ -4,26 +4,40 @@ param(
 )
 
 function Disable-DefenderAndFirewall {
-    Write-Host "[*] Disabling Microsoft Defender Real-time Protection..." -ForegroundColor Yellow
+    Write-Host "[*] Disabling Microsoft Defender Protections..." -ForegroundColor Yellow
+
     Set-MpPreference -DisableRealtimeMonitoring $true
+    Set-MpPreference -DisableBehaviorMonitoring $true
+    Set-MpPreference -DisableBlockAtFirstSeen $true
+    Set-MpPreference -DisableIOAVProtection $true
+    Set-MpPreference -DisablePrivacyMode $true
+    Set-MpPreference -DisableScriptScanning $true
+    Set-MpPreference -SubmitSamplesConsent 2  
+    Set-MpPreference -MAPSReporting 0      
 
     Write-Host "[*] Disabling Windows Firewall (Domain, Private, Public)..." -ForegroundColor Yellow
     Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled False
 
-    Write-Host "[+] Defender and Firewall are now disabled." -ForegroundColor Green
+    Write-Host "[+] Defender and Firewall are now fully disabled." -ForegroundColor Green
 }
 
 function Enable-DefenderAndFirewall {
-    Write-Host "[*] Enabling Microsoft Defender Real-time Protection..." -ForegroundColor Cyan
-    Set-MpPreference -DisableRealtimeMonitoring $false
+    Write-Host "[*] Enabling Microsoft Defender Protections..." -ForegroundColor Cyan
 
+    Set-MpPreference -DisableRealtimeMonitoring $false
+    Set-MpPreference -DisableBehaviorMonitoring $false
+    Set-MpPreference -DisableBlockAtFirstSeen $false
+    Set-MpPreference -DisableIOAVProtection $false
+    Set-MpPreference -DisablePrivacyMode $false
+    Set-MpPreference -DisableScriptScanning $false
+    Set-MpPreference -SubmitSamplesConsent 1  
+    Set-MpPreference -MAPSReporting 2        
     Write-Host "[*] Enabling Windows Firewall (Domain, Private, Public)..." -ForegroundColor Cyan
     Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled True
 
     Write-Host "[+] Defender and Firewall are now enabled." -ForegroundColor Green
 }
 
-# Normalize the action input
 $ActionNormalized = $Action.ToLower().Replace("-", "").Replace("--", "")
 
 switch ($ActionNormalized) {
