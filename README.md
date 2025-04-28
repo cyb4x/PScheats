@@ -57,7 +57,6 @@ It is useful for quick security configuration during testing, pentesting, or tro
 
 ### Example Usage
 ```powershell
-# Disable Windows Defender Real-Time Protection
 Set-MpPreference -DisableRealtimeMonitoring $true
 Set-MpPreference -DisableBehaviorMonitoring $true
 Set-MpPreference -DisableBlockAtFirstSeen $true
@@ -74,14 +73,14 @@ Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled False
 .\ManageDF.ps1 Status
 ```
 
-#### To disable Defender and Firewall:
-```powershell
-.\ManageDF.ps1 Disable
-```
-
 #### To monitor Defender and Firewall:
 ```powershell
 .\ManageDF.ps1 Monitor
+```
+
+#### To disable Defender and Firewall:
+```powershell
+.\ManageDF.ps1 Disable
 ```
 
 #### To Enable Defender and Firewall:
