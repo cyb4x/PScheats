@@ -33,3 +33,37 @@ The `CreateUser.ps1` script allows you to automate the creation of a user on a W
 .\CreateUser.ps1 -d testuser 
 ```
 ![](1.png)
+
+## ManageDF.ps1
+
+The `ManageDF.ps1` script allows you to **easily enable or disable Microsoft Defender** real-time protection and the **Windows Firewall** (Domain, Private, and Public profiles) on a Windows machine.  
+It is useful for quick security configuration during testing, pentesting, or troubleshooting.
+
+---
+
+### What it Does
+- Disables or enables Microsoft Defender real-time monitoring.
+- Disables or enables Windows Firewall (all profiles).
+- Accepts multiple ways of specifying the action (`Enable`, `Disable`, `-e`, `-d`, `--enable`, `--disable`).
+
+---
+
+### Parameters
+- `Enable` / `-e` / `--enable` : Enables Defender and Firewall.
+- `Disable` / `-d` / `--disable` : Disables Defender and Firewall.
+
+---
+
+### Example Usage
+
+#### To disable Defender and Firewall:
+```powershell
+.\ManageDF.ps1 Disable
+```
+
+#### To Enable Defender and Firewall:
+```powershell
+.\ManageDF.ps1 Enable
+```
+![](image.png)
+
