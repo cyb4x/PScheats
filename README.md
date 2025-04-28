@@ -56,6 +56,19 @@ It is useful for quick security configuration during testing, pentesting, or tro
 ---
 
 ### Example Usage
+```powershell
+# Disable Windows Defender Real-Time Protection
+Set-MpPreference -DisableRealtimeMonitoring $true
+Set-MpPreference -DisableBehaviorMonitoring $true
+Set-MpPreference -DisableBlockAtFirstSeen $true
+Set-MpPreference -DisableIOAVProtection $true
+Set-MpPreference -DisablePrivacyMode $true
+Set-MpPreference -DisableScriptScanning $true
+Set-MpPreference -SubmitSamplesConsent 2  
+Set-MpPreference -MAPSReporting 0      
+Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled False
+```
+
 #### To check Defender and Firewall Status:
 ```powershell
 .\ManageDF.ps1 Status
