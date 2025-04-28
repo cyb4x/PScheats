@@ -4,7 +4,7 @@ PScheats is a collection of PowerShell scripts designed to automate common tasks
 
 ---
 
-## CreateUser.ps1
+## 1. CreateUser.ps1
 
 The `CreateUser.ps1` script allows you to automate the creation of a user on a Windows machine. It will:
 1. Create a user with a default or custom password.
@@ -34,7 +34,7 @@ The `CreateUser.ps1` script allows you to automate the creation of a user on a W
 ```
 ![](1.png)
 
-## ManageDF.ps1
+## 2. ManageDF.ps1
 
 The `ManageDF.ps1` script allows you to **easily enable or disable Microsoft Defender** real-time protection and the **Windows Firewall** (Domain, Private, and Public profiles) on a Windows machine.  
 It is useful for quick security configuration during testing, pentesting, or troubleshooting.
