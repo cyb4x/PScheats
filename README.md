@@ -55,6 +55,10 @@ It is useful for quick security configuration during testing, pentesting, or tro
 ---
 
 ### Example Usage
+#### To check Defender and Firewall Status:
+```powershell
+.\ManageDF.ps1 Status
+```
 
 #### To disable Defender and Firewall:
 ```powershell
