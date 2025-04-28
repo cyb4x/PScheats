@@ -44,6 +44,7 @@ It is useful for quick security configuration during testing, pentesting, or tro
 ### What it Does
 - Disables or enables Microsoft Defender real-time monitoring.
 - Disables or enables Windows Firewall (all profiles).
+- Monitor(If turned on, it diables)
 - Accepts multiple ways of specifying the action (`Enable`, `Disable`, `-e`, `-d`, `--enable`, `--disable`).
 
 ---
@@ -63,6 +64,11 @@ It is useful for quick security configuration during testing, pentesting, or tro
 #### To disable Defender and Firewall:
 ```powershell
 .\ManageDF.ps1 Disable
+```
+
+#### To monitor Defender and Firewall:
+```powershell
+.\ManageDF.ps1 Monitor
 ```
 
 #### To Enable Defender and Firewall:
