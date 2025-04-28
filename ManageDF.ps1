@@ -32,12 +32,44 @@ function Enable-DefenderAndFirewall {
     Set-MpPreference -DisableScriptScanning $false
     Set-MpPreference -SubmitSamplesConsent 1  
     Set-MpPreference -MAPSReporting 2        
+
     Write-Host "[*] Enabling Windows Firewall (Domain, Private, Public)..." -ForegroundColor Cyan
     Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled True
 
     Write-Host "[+] Defender and Firewall are now enabled." -ForegroundColor Green
 }
 
+function Check-Status {
+    Write-Host "[*] Checking Microsoft Defender and Firewall status..." -ForegroundColor Yellow
+
+    $realtime = (Get-MpPreference).DisableRealtimeMonitoring
+    $behavior = (Get-MpPreference).DisableBehaviorMonitoring
+    $blockfirstseen = (Get-MpPreference).DisableBlockAtFirstSeen
+    $ioav = (Get-MpPreference).DisableIOAVProtection
+    $privacy = (Get-MpPreference).DisablePrivacyMode
+    $scriptscan = (Get-MpPreference).DisableScriptScanning
+    $maps = (Get-MpPreference).MAPSReporting
+
+    $domainFW = (Get-NetFirewallProfile -Profile Domain).Enabled
+    $privateFW = (Get-NetFirewallProfile -Profile Private).Enabled
+    $publicFW = (Get-NetFirewallProfile -Profile Public).Enabled
+
+    Write-Host "`n[Defender Status]" -ForegroundColor Cyan
+    Write-Host "Real-Time Protection Disabled: $realtime"
+    Write-Host "Behavior Monitoring Disabled:  $behavior"
+    Write-Host "Block At First Seen Disabled:   $blockfirstseen"
+    Write-Host "IOAV Protection Disabled:      $ioav"
+    Write-Host "Privacy Mode Disabled:         $privacy"
+    Write-Host "Script Scanning Disabled:      $scriptscan"
+    Write-Host "MAPS Reporting Level:          $maps (0=Off, 1=Basic, 2=Advanced)"
+
+    Write-Host "`n[Firewall Status]" -ForegroundColor Cyan
+    Write-Host "Domain Firewall Enabled:       $domainFW"
+    Write-Host "Private Firewall Enabled:      $privateFW"
+    Write-Host "Public Firewall Enabled:       $publicFW"
+}
+
+# Normalize the action input
 $ActionNormalized = $Action.ToLower().Replace("-", "").Replace("--", "")
 
 switch ($ActionNormalized) {
@@ -45,7 +77,9 @@ switch ($ActionNormalized) {
     "e"      { Enable-DefenderAndFirewall }
     "disable" { Disable-DefenderAndFirewall }
     "d"      { Disable-DefenderAndFirewall }
+    "status" { Check-Status }
+    "s"      { Check-Status }
     default {
-        Write-Host "[!] Invalid action. Use Enable, Disable, -e, -d, --enable, --disable" -ForegroundColor Red
+        Write-Host "[!] Invalid action. Use Enable, Disable, Status, or -e, -d, -s, --enable, --disable, --status" -ForegroundColor Red
     }
 }
