@@ -10,7 +10,7 @@ The `CreateUser.ps1` script allows you to automate the creation of a user on a W
 1. Create a user with a default or custom password.
 2. Add the user to the local `Administrators` and `Remote Desktop Users` groups.
 3. Enable Remote Desktop (RDP) on the machine.
-4. Attempt to add the user to the "Domain Admins" group (if possible).
+4. Attempt to add the user to the "`Domain Admins`" group (if possible).
 5. Provide a pre-configured `xfreerdp` command to connect to the machine via RDP.
 
 ### Parameters
@@ -24,7 +24,7 @@ The `CreateUser.ps1` script allows you to automate the creation of a user on a W
 ```powershell
 .\CreateUser.ps1 -u testuser
 ```
-#### To create a user with the custom password `P@ssw0rd`:
+#### To create a user with the custom password `P@ssw0rd#`:
 ```powershell
 .\CreateUser.ps1 -u testuser -p P@ssw0rd#
 ```
