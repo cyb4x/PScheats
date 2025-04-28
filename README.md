@@ -22,13 +22,13 @@ The `CreateUser.ps1` script allows you to automate the creation of a user on a W
 
 #### To create a user with the default password `P@ssw0rd`:
 ```powershell
-.\CreateUser.ps1 testuser
+.\CreateUser.ps1 -u testuser
 ```
 #### To create a user with the custom password `P@ssw0rd`:
 ```powershell
-.\CreateUser.ps1 testuser P@ssw0rd#
+.\CreateUser.ps1 -u testuser -p P@ssw0rd#
 ```
 #### To delete a user and revert all changes:
 ```powershell
-.\CreateUser.ps1 testuser P@ssw0rd#
+.\CreateUser.ps1 -d testuser 
 ```
